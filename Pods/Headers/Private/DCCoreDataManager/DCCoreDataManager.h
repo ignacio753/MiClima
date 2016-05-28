@@ -1,0 +1,1 @@
+../../../DCCoreDataManager/Pod/Classes/DCCoreDataManager.h
