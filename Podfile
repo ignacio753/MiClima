@@ -6,5 +6,6 @@
 target 'MiClima' do
   pod "DCCoreDataManager"
   pod "AFNetworking"
+  pod 'MBProgressHUD', '~> 0.9.2'
 end
 
