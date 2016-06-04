@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F583C285EACFD96AF9C37692'
+               BlueprintIdentifier = 'C6CFC4F2374A3548C0895DB7'
                BlueprintName = 'DCCoreDataManager-DCCoreDataManager'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'DCCoreDataManager.bundle'>

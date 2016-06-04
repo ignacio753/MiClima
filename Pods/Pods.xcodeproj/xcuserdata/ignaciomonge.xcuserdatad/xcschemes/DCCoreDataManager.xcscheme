@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '66A5F47BFCEBDB2249DA4623'
+               BlueprintIdentifier = '63D6E0E39AF76F2201B8ED2F'
                BlueprintName = 'DCCoreDataManager'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libDCCoreDataManager.a'>

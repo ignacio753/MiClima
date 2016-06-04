@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BC923A4E32794C445E170080'
-               BlueprintName = 'Pods-MiClima'
+               BlueprintIdentifier = 'F25F4AF4972CBB040C3D7E64'
+               BlueprintName = 'MBProgressHUD'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-MiClima.a'>
+               BuildableName = 'libMBProgressHUD.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

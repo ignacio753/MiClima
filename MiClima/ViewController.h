@@ -7,9 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFHTTPSessionManager.h"
+#import <CoreLocation/CoreLocation.h>
+#import "Ciudad.h"
+#import "DCCoreDataManager.h"
+#import "MBProgressHUD.h"
+#import <Social/Social.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <CLLocationManagerDelegate,UISearchBarDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *weatherDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pressureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *windSpeedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *windDirectionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *humidityLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherIconImage;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
+@property (weak, nonatomic) NSString *cityId;
 @end
 

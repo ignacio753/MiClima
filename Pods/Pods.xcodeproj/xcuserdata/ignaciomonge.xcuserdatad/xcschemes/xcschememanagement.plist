@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MiClima.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,12 +32,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1C93B801495D06B974D9AE924A89998C</key>
+		<key>928353533005A4198EBDA5B700D37B64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>928353533005A4198EBDA5B700D37B64</key>
+		<key>AB2B457BC46456C9003D3BE0E1224C39</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -43,6 +48,11 @@
 			<true/>
 		</dict>
 		<key>E2CD8675F10C11B7552C0B311FA7051D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

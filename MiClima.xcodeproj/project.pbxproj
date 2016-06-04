@@ -17,6 +17,9 @@
 		9AD424971CFA359700295AB8 /* MiClima.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AD424951CFA359700295AB8 /* MiClima.xcdatamodeld */; };
 		9AD424A41CFA371C00295AB8 /* Ciudad+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD424A11CFA371C00295AB8 /* Ciudad+CoreDataProperties.m */; };
 		9AD424A51CFA371C00295AB8 /* Ciudad.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD424A31CFA371C00295AB8 /* Ciudad.m */; };
+		9AD424A71CFAB5F200295AB8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD424A61CFAB5F200295AB8 /* CoreLocation.framework */; };
+		9AD424AA1CFE6EBD00295AB8 /* FavoritiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD424A91CFE6EBD00295AB8 /* FavoritiesViewController.m */; };
+		9AD424AC1D037C7D00295AB8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD424AB1D037C7D00295AB8 /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,10 @@
 		9AD424A11CFA371C00295AB8 /* Ciudad+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Ciudad+CoreDataProperties.m"; path = "Model/Ciudad+CoreDataProperties.m"; sourceTree = "<group>"; };
 		9AD424A21CFA371C00295AB8 /* Ciudad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ciudad.h; path = Model/Ciudad.h; sourceTree = "<group>"; };
 		9AD424A31CFA371C00295AB8 /* Ciudad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Ciudad.m; path = Model/Ciudad.m; sourceTree = "<group>"; };
+		9AD424A61CFAB5F200295AB8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9AD424A81CFE6EBD00295AB8 /* FavoritiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritiesViewController.h; sourceTree = "<group>"; };
+		9AD424A91CFE6EBD00295AB8 /* FavoritiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritiesViewController.m; sourceTree = "<group>"; };
+		9AD424AB1D037C7D00295AB8 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D45359037624AA788F5740A4 /* Pods-MiClima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiClima.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiClima/Pods-MiClima.release.xcconfig"; sourceTree = "<group>"; };
 		D979069813A245985CDE40A5 /* Pods-MiClima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiClima.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiClima/Pods-MiClima.debug.xcconfig"; sourceTree = "<group>"; };
 		F0D4136B72F7A0C3E0E9967F /* libPods-MiClima.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiClima.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD424AC1D037C7D00295AB8 /* Social.framework in Frameworks */,
+				9AD424A71CFAB5F200295AB8 /* CoreLocation.framework in Frameworks */,
 				814121304ECB94FD4CEA9AAD /* libPods-MiClima.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,6 +64,8 @@
 		3AA8A7ABDE54E163275F2073 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AD424AB1D037C7D00295AB8 /* Social.framework */,
+				9AD424A61CFAB5F200295AB8 /* CoreLocation.framework */,
 				F0D4136B72F7A0C3E0E9967F /* libPods-MiClima.a */,
 			);
 			name = Frameworks;
@@ -101,6 +112,8 @@
 				9AD4248F1CF5425C00295AB8 /* Info.plist */,
 				9AD4247E1CF5425C00295AB8 /* Supporting Files */,
 				9AD424951CFA359700295AB8 /* MiClima.xcdatamodeld */,
+				9AD424A81CFE6EBD00295AB8 /* FavoritiesViewController.h */,
+				9AD424A91CFE6EBD00295AB8 /* FavoritiesViewController.m */,
 			);
 			path = MiClima;
 			sourceTree = "<group>";
@@ -158,6 +171,7 @@
 				TargetAttributes = {
 					9AD4247A1CF5425C00295AB8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = BBN67W42FX;
 					};
 				};
 			};
@@ -246,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AD424A41CFA371C00295AB8 /* Ciudad+CoreDataProperties.m in Sources */,
+				9AD424AA1CFE6EBD00295AB8 /* FavoritiesViewController.m in Sources */,
 				9AD424971CFA359700295AB8 /* MiClima.xcdatamodeld in Sources */,
 				9AD424861CF5425C00295AB8 /* ViewController.m in Sources */,
 				9AD424831CF5425C00295AB8 /* AppDelegate.m in Sources */,
@@ -363,10 +378,14 @@
 			baseConfigurationReference = D979069813A245985CDE40A5 /* Pods-MiClima.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MiClima/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cenfotec.ios.MiClima;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cenfotec.ios.MyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -375,10 +394,14 @@
 			baseConfigurationReference = D45359037624AA788F5740A4 /* Pods-MiClima.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MiClima/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cenfotec.ios.MiClima;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cenfotec.ios.MyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
