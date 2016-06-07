@@ -20,6 +20,7 @@
 		9AD424A71CFAB5F200295AB8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD424A61CFAB5F200295AB8 /* CoreLocation.framework */; };
 		9AD424AA1CFE6EBD00295AB8 /* FavoritiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD424A91CFE6EBD00295AB8 /* FavoritiesViewController.m */; };
 		9AD424AC1D037C7D00295AB8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD424AB1D037C7D00295AB8 /* Social.framework */; };
+		9AD424AF1D054A7400295AB8 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD424AE1D054A7400295AB8 /* Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		9AD424A81CFE6EBD00295AB8 /* FavoritiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritiesViewController.h; sourceTree = "<group>"; };
 		9AD424A91CFE6EBD00295AB8 /* FavoritiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritiesViewController.m; sourceTree = "<group>"; };
 		9AD424AB1D037C7D00295AB8 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		9AD424AD1D054A7400295AB8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Model/Constants.h; sourceTree = "<group>"; };
+		9AD424AE1D054A7400295AB8 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Model/Constants.m; sourceTree = "<group>"; };
 		D45359037624AA788F5740A4 /* Pods-MiClima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiClima.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiClima/Pods-MiClima.release.xcconfig"; sourceTree = "<group>"; };
 		D979069813A245985CDE40A5 /* Pods-MiClima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiClima.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiClima/Pods-MiClima.debug.xcconfig"; sourceTree = "<group>"; };
 		F0D4136B72F7A0C3E0E9967F /* libPods-MiClima.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiClima.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +136,8 @@
 				9AD424A11CFA371C00295AB8 /* Ciudad+CoreDataProperties.m */,
 				9AD424A21CFA371C00295AB8 /* Ciudad.h */,
 				9AD424A31CFA371C00295AB8 /* Ciudad.m */,
+				9AD424AD1D054A7400295AB8 /* Constants.h */,
+				9AD424AE1D054A7400295AB8 /* Constants.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				9AD424A41CFA371C00295AB8 /* Ciudad+CoreDataProperties.m in Sources */,
 				9AD424AA1CFE6EBD00295AB8 /* FavoritiesViewController.m in Sources */,
 				9AD424971CFA359700295AB8 /* MiClima.xcdatamodeld in Sources */,
+				9AD424AF1D054A7400295AB8 /* Constants.m in Sources */,
 				9AD424861CF5425C00295AB8 /* ViewController.m in Sources */,
 				9AD424831CF5425C00295AB8 /* AppDelegate.m in Sources */,
 				9AD424801CF5425C00295AB8 /* main.m in Sources */,

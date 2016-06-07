@@ -24,10 +24,10 @@ CLLocationManager *locationManager;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     locationManager = [[CLLocationManager alloc] init];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
-    
     [self.view addGestureRecognizer:tap];
 }
 
@@ -35,9 +35,8 @@ CLLocationManager *locationManager;
     [super viewWillAppear:animated];
     
     self.dateTimeLabel.text = [self getCurrentDate];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     _searchBar.text = @"";
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     if (_cityId != nil) {
         [self getWeatherByCityId];
@@ -48,15 +47,9 @@ CLLocationManager *locationManager;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (NSString*)getCurrentDate {
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"h:mm a, EEEE d"];
-    
-    return [NSString stringWithFormat:@"%@th", [dateFormatter stringFromDate:[NSDate date]] ];
-}
+#pragma mark - CLLocationManagerDelegate
 
 - (void)getCurrentLocation {
     locationManager.delegate = self;
@@ -66,78 +59,14 @@ CLLocationManager *locationManager;
     [locationManager startUpdatingLocation];
 }
 
-#pragma mark - Add Favorite City
-- (IBAction)addFavoriteCity:(id)sender {
-    if (_cityId != nil) {
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"id", _cityId];
-        NSArray *results = [[DCCoreDataManager sharedInstance] getEntities:@"Ciudad" withPredicate:predicate];
-        
-        if ([results count] > 0) {
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle:[[results objectAtIndex:0] name]
-                                          message:@"This city is already in your favorites!"
-                                          preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* okButton = [UIAlertAction
-                                       actionWithTitle:@"Ok"
-                                       style:UIAlertActionStyleDefault
-                                       handler:^(UIAlertAction * action) { }];
-            
-            [alert addAction:okButton];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-        } else {
-            NSMutableDictionary *entityValues = [NSMutableDictionary dictionary];
-            [entityValues setObject:_cityId forKey:@"id"];
-            [entityValues setObject:cityName forKey:@"name"];
-            [[DCCoreDataManager sharedInstance]saveEntity:@"Ciudad" withValues:entityValues];
-            [[DCCoreDataManager sharedInstance] saveContext];
-            
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle:@"Success"
-                                          message:@"Your city has been saved!"
-                                          preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* okButton = [UIAlertAction
-                                       actionWithTitle:@"Ok"
-                                       style:UIAlertActionStyleDefault
-                                       handler:^(UIAlertAction * action) { }];
-            
-            [alert addAction:okButton];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }
-}
-
-
-
-#pragma mark - CLLocationManagerDelegate
-
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"didFailWithError: %@", error);
-    
-    UIAlertController * alert=   [UIAlertController
-                                  alertControllerWithTitle:@"Error"
-                                  message:@"Failed to get your location"
-                                  preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* okButton = [UIAlertAction
-                                actionWithTitle:@"Ok"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action) { }];
-    
-    [alert addAction:okButton];
-    
-    [self presentViewController:alert animated:YES completion:nil];
+    [self displayAlert:(@"Error")withMessage:@"Failed to get your location"];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
@@ -152,27 +81,17 @@ CLLocationManager *locationManager;
     NSString *latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:latitude, @"lat", longitude, @"lon", @"metric", @"units", @"4262935abf4a14a968adebf794f0f1eb", @"appid", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:latitude, @"lat", longitude, @"lon", @"metric", @"units", WEATHER_API_KEY, @"appid", nil];
     
     [self getWeather:(params)];
 }
 
-- (void) getWeatherByCityId {
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:_cityId, @"id", @"metric", @"units", @"4262935abf4a14a968adebf794f0f1eb", @"appid", nil];
-    
-    [self getWeather:(params)];
-}
-
-- (void) getWeatherByQuery:(NSString*) query {
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", @"metric", @"units", @"4262935abf4a14a968adebf794f0f1eb", @"appid", nil];
-    
-    [self getWeather:(params)];
-}
+#pragma mark - Weather API Call
 
 - (void) getWeather:(NSDictionary*) params {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    [manager GET:@"http://api.openweathermap.org/data/2.5/weather" parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager GET:WEATHER_API_URL parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -201,11 +120,12 @@ CLLocationManager *locationManager;
             self.weatherDescriptionLabel.text = cityWeather;
             self.temperatureLabel.text = cityTemp;
             self.humidityLabel.text = [NSString stringWithFormat:@"%@ %@",humidity, @"%"];
-            self.pressureLabel.text = [NSString stringWithFormat:@"%@ hPa", pressure];
-            self.windSpeedLabel.text = [NSString stringWithFormat:@"%@ meter/sec", windSpeed];
-            self.windDirectionLabel.text = [NSString stringWithFormat:@"%@ degrees", windDeg];
             
-            NSString *iconUrl = [NSString stringWithFormat:@"http://openweathermap.org/img/w/%@.png", iconId];
+            self.pressureLabel.text = [NSString stringWithFormat:@"%@ hPa", [self getRoundedValue:(pressure)]];
+            self.windSpeedLabel.text = [NSString stringWithFormat:@"%@ meter/sec", [self getRoundedValue:(windSpeed)]];
+            self.windDirectionLabel.text = [NSString stringWithFormat:@"%@ degrees", [self getRoundedValue:(windDeg)]];
+            
+            NSString *iconUrl = [NSString stringWithFormat:WEATHER_API_IMAGE_URL, iconId];
             
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: iconUrl]];
             self.weatherIconImage.image = [UIImage imageWithData: imageData];
@@ -221,14 +141,12 @@ CLLocationManager *locationManager;
     
 }
 
+#pragma mark - Search Bar
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString* query = searchBar.text;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self getWeatherByQuery:(query)];
-    [self.view endEditing:YES];
-}
-
--(void)dismissKeyboard {
     [self.view endEditing:YES];
 }
 
@@ -238,28 +156,121 @@ CLLocationManager *locationManager;
     }
 }
 
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Add Favorite City
+
+- (IBAction)addFavoriteCity:(id)sender {
+    if (_cityId != nil) {
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"id", _cityId];
+        NSArray *results = [[DCCoreDataManager sharedInstance] getEntities:@"Ciudad" withPredicate:predicate];
+        
+        if ([results count] > 0) {
+            [self displayAlert:([[results objectAtIndex:0] name])withMessage:@"This city is already in your favorites!"];
+        } else {
+            NSMutableDictionary *entityValues = [NSMutableDictionary dictionary];
+            [entityValues setObject:_cityId forKey:@"id"];
+            [entityValues setObject:cityName forKey:@"name"];
+            [[DCCoreDataManager sharedInstance]saveEntity:@"Ciudad" withValues:entityValues];
+            [[DCCoreDataManager sharedInstance] saveContext];
+            
+            [self displayAlert:(@"Success" )withMessage:@"Your city has been saved!"];
+        }
+    }
+}
+
+#pragma mark - Share to Facebook
+
 - (IBAction)shareToFacebook:(id)sender {
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        
-        NSString *sharingText = [NSString stringWithFormat:@"Current weather in %@: %@ with %@", cityName, cityTemp, cityWeather];
-        [controller setInitialText:sharingText];
-        [self presentViewController:controller animated:YES completion:Nil];
-    } else {
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Error"
-                                      message:@"You need to log into Facebook to be able to share the weather!"
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* okButton = [UIAlertAction
-                                   actionWithTitle:@"Ok"
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Share"
+                                  message:@"Select the social network you would like to share the weather with:"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* fbButton = [UIAlertAction
+                               actionWithTitle:@"Facebook"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   
+                                   SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+                                   
+                                   NSString *sharingText = [NSString stringWithFormat:@"Current weather in %@: %@ with %@", cityName, cityTemp, cityWeather];
+                                   [controller setInitialText:sharingText];
+                                   [self presentViewController:controller animated:YES completion:Nil];
+                                   
+                               }];
+    
+    UIAlertAction* twitterButton = [UIAlertAction
+                                    actionWithTitle:@"Twitter"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        
+                                        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+                                        
+                                        NSString *sharingText = [NSString stringWithFormat:@"Current weather in %@: %@ with %@", cityName, cityTemp, cityWeather];
+                                        [controller setInitialText:sharingText];
+                                        [self presentViewController:controller animated:YES completion:Nil];
+                                        
+                                    }];
+    
+    UIAlertAction* cancelButton = [UIAlertAction
+                                   actionWithTitle:@"Cancel"
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * action) { }];
-        
-        [alert addAction:okButton];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+    
+    [alert addAction:fbButton];
+    [alert addAction:twitterButton];
+    [alert addAction:cancelButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - Utils
+
+-(void) displayAlert:(NSString*) title withMessage: (NSString*) message  {
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:title
+                                  message:message
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:@"Ok"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) { }];
+    
+    [alert addAction:okButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (NSString*)getCurrentDate {
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"h:mm a, EEEE d"];
+    
+    return [NSString stringWithFormat:@"%@th", [dateFormatter stringFromDate:[NSDate date]] ];
+}
+
+- (void) getWeatherByCityId {
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:_cityId, @"id", @"metric", @"units", WEATHER_API_KEY, @"appid", nil];
+    
+    [self getWeather:(params)];
+}
+
+- (void) getWeatherByQuery:(NSString*) query {
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", @"metric", @"units", WEATHER_API_KEY, @"appid", nil];
+    
+    [self getWeather:(params)];
+}
+
+- (NSString*) getRoundedValue:(NSString*) value {
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+    [fmt setPositiveFormat:@"0.##"];
+    
+    return [fmt stringFromNumber:[NSNumber numberWithFloat:[value floatValue]]];
 }
 
 @end

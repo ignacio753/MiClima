@@ -13,6 +13,7 @@
 #import "DCCoreDataManager.h"
 #import "MBProgressHUD.h"
 #import <Social/Social.h>
+#import "Constants.h"
 
 @interface ViewController : UIViewController <CLLocationManagerDelegate,UISearchBarDelegate>
 
