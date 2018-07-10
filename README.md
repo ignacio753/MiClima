@@ -6,7 +6,9 @@ This app is written in Objective-C.
 
 ## Dependencies
 
-This app uses third party services
+This app uses third party services and tools
 
 * OpenWeatherAPI
+* DCCoreDataManager
+* AFNetworking
 
